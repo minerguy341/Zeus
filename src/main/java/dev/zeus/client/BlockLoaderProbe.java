@@ -22,7 +22,8 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import java.lang.reflect.Field;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.IdentityHashMap;
 import java.io.BufferedReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ import java.util.Set;
  * Resolves which model loader(s) a looked-at block or held item's effective resources declare.
  */
 public final class BlockLoaderProbe {
+    /** Fusion marks biome-tinted quads with this tintIndex for item/block color hooks. */
+    private static final int FUSION_ITEM_TINT_INDEX = 39216;
+
     private BlockLoaderProbe() {
     }
 
@@ -76,18 +80,10 @@ public final class BlockLoaderProbe {
         tell(player, "Effective loader(s): " + summary);
 
         if (stack.getItem() instanceof BlockItem blockItem) {
-            ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(blockItem.getBlock());
-            boolean wouldSuppress = AthenaSuppress.shouldSuppress(
-                    ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), "block/" + blockId.getPath())
-            );
-            boolean wouldSuppressPlain = AthenaSuppress.shouldSuppress(blockId);
-            tell(player, "Zeus would suppress Athena for block/" + blockId.getPath() + ": " + wouldSuppress
-                    + " | for " + blockId + ": " + wouldSuppressPlain);
-            probeAthena(player, blockId);
+            reportAthenaSuppress(player, BuiltInRegistries.BLOCK.getKey(blockItem.getBlock()));
         }
 
-        probeBakedItemModel(player, stack);
-        probeFusionItemTint(player, stack);
+        probeHeldItemBaked(player, stack);
         tell(player, "---- end item probe ----");
     }
 
@@ -153,17 +149,19 @@ public final class BlockLoaderProbe {
         String summary = loaders.isEmpty() ? "vanilla (no loader key)" : String.join(", ", loaders);
         tell(player, "Effective loader(s): " + summary);
 
+        reportAthenaSuppress(player, blockId);
+        probeBakedModel(player, state);
+        tell(player, "---- end probe ----");
+    }
+
+    private static void reportAthenaSuppress(LocalPlayer player, ResourceLocation blockId) {
         boolean wouldSuppress = AthenaSuppress.shouldSuppress(
                 ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), "block/" + blockId.getPath())
         );
-        // Also try plain block id path used by some Athena keys
         boolean wouldSuppressPlain = AthenaSuppress.shouldSuppress(blockId);
         tell(player, "Zeus would suppress Athena for block/" + blockId.getPath() + ": " + wouldSuppress
                 + " | for " + blockId + ": " + wouldSuppressPlain);
-
         probeAthena(player, blockId);
-        probeBakedModel(player, state);
-        tell(player, "---- end probe ----");
     }
 
     private static void inspectModel(
@@ -333,21 +331,6 @@ public final class BlockLoaderProbe {
                 }
             }
         }
-        // Athena-style blockstate may only have athena:loader
-        if (out.isEmpty()) {
-            String athenaLoader = null;
-            if (blockstate.has("athena:loader") && blockstate.get("athena:loader").isJsonPrimitive()) {
-                athenaLoader = blockstate.get("athena:loader").getAsString();
-            } else if (blockstate.has("loader") && blockstate.get("loader").isJsonPrimitive()) {
-                String l = blockstate.get("loader").getAsString();
-                if (l.startsWith("athena:")) {
-                    athenaLoader = l;
-                }
-            }
-            if (athenaLoader != null) {
-                // No discrete model list — mark via synthetic note later
-            }
-        }
         return out;
     }
 
@@ -414,37 +397,62 @@ public final class BlockLoaderProbe {
 
     private static void probeBakedModel(LocalPlayer player, BlockState state) {
         try {
-            BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
-            tell(player, "BakedModel (from ModelBakery / BlockModelShaper):");
-            Set<String> tags = new LinkedHashSet<>();
-            Set<Object> visited = new HashSet<>();
-            walkBaked(player, model, 0, visited, tags);
-            tell(player, "Baked verdict: " + bakedVerdict(tags));
+            reportBaked(
+                    player,
+                    Minecraft.getInstance().getBlockRenderer().getBlockModel(state),
+                    "BakedModel (from ModelBakery / BlockModelShaper):"
+            );
         } catch (Exception e) {
             tell(player, "BakedModel probe failed: " + e);
         }
     }
 
-    private static void probeBakedItemModel(LocalPlayer player, ItemStack stack) {
+    /** Walk the held item's baked model once for loader tags and Fusion tint diagnostics. */
+    private static void probeHeldItemBaked(LocalPlayer player, ItemStack stack) {
         try {
             Minecraft mc = Minecraft.getInstance();
             BakedModel model = mc.getItemRenderer().getModel(stack, mc.level, player, 0);
-            tell(player, "BakedModel (from ItemRenderer):");
-            Set<String> tags = new LinkedHashSet<>();
-            Set<Object> visited = new HashSet<>();
-            walkBaked(player, model, 0, visited, tags);
-            tell(player, "Baked verdict: " + bakedVerdict(tags));
+            reportBaked(player, model, "BakedModel (from ItemRenderer):");
+
+            tell(player, "Fusion item tint: Zeus remaps null world/pos to player biome (live).");
+            probeFusionDefaultGrass(player);
+
+            try {
+                Set<Integer> tintIndices = new LinkedHashSet<>();
+                Set<String> spriteTinting = new LinkedHashSet<>();
+                collectTintDiagnostics(model, newIdentitySet(), tintIndices, spriteTinting, 0);
+                tell(player, "Baked tintIndex values: "
+                        + (tintIndices.isEmpty() ? "(none found)" : tintIndices.toString()));
+                boolean fusionMagic = tintIndices.contains(FUSION_ITEM_TINT_INDEX);
+                tell(player, "Fusion magic tintIndex " + FUSION_ITEM_TINT_INDEX + " present: " + fusionMagic
+                        + (fusionMagic
+                        ? " (item renderer should apply tint)"
+                        : " (no Fusion tint quads on this item model)"));
+                if (!spriteTinting.isEmpty()) {
+                    tell(player, "Sprite Fusion tinting data: " + String.join(", ", spriteTinting));
+                } else {
+                    tell(player, "Sprite Fusion tinting data: (none found)");
+                }
+            } catch (Exception e) {
+                tell(player, "Tint-index walk failed: " + e);
+            }
         } catch (Exception e) {
-            tell(player, "Baked item model probe failed: " + e);
+            tell(player, "Held item baked probe failed: " + e);
         }
     }
 
-    /**
-     * Fusion item tint uses magic tintIndex 39216 + {@code QuadTintingHelper} with null world/pos,
-     * which returns the <em>default</em> grass/foliage color — not the biome at your feet.
-     */
-    private static void probeFusionItemTint(LocalPlayer player, ItemStack stack) {
-        tell(player, "Fusion item tint: Zeus remaps null world/pos to player biome (live). Without Zeus: default grass only.");
+    private static void reportBaked(LocalPlayer player, BakedModel model, String header) {
+        tell(player, header);
+        Set<String> tags = new LinkedHashSet<>();
+        walkBaked(player, model, 0, newIdentitySet(), tags);
+        tell(player, "Baked verdict: " + bakedVerdict(tags));
+    }
+
+    private static Set<Object> newIdentitySet() {
+        return Collections.newSetFromMap(new IdentityHashMap<>());
+    }
+
+    private static void probeFusionDefaultGrass(LocalPlayer player) {
         try {
             Class<?> helper = Class.forName("com.supermartijn642.fusion.texture.QuadTintingHelper");
             Class<?> tintingEnum = Class.forName(
@@ -476,27 +484,6 @@ public final class BlockLoaderProbe {
         } catch (Exception e) {
             tell(player, "Fusion tint helper probe failed: " + e);
         }
-
-        try {
-            Minecraft mc = Minecraft.getInstance();
-            BakedModel model = mc.getItemRenderer().getModel(stack, mc.level, player, 0);
-            Set<Integer> tintIndices = new LinkedHashSet<>();
-            Set<String> spriteTinting = new LinkedHashSet<>();
-            Set<Object> visited = new HashSet<>();
-            collectTintDiagnostics(model, visited, tintIndices, spriteTinting, 0);
-            tell(player, "Baked tintIndex values: "
-                    + (tintIndices.isEmpty() ? "(none found)" : tintIndices.toString()));
-            boolean fusionMagic = tintIndices.contains(39216);
-            tell(player, "Fusion magic tintIndex 39216 present: " + fusionMagic
-                    + (fusionMagic ? " (item renderer should apply default tint)" : " (tint will NOT apply on items)"));
-            if (!spriteTinting.isEmpty()) {
-                tell(player, "Sprite Fusion tinting data: " + String.join(", ", spriteTinting));
-            } else {
-                tell(player, "Sprite Fusion tinting data: (none found on walked model fields)");
-            }
-        } catch (Exception e) {
-            tell(player, "Tint-index walk failed: " + e);
-        }
     }
 
     private static void collectTintDiagnostics(
@@ -511,9 +498,11 @@ public final class BlockLoaderProbe {
         }
         Class<?> cls = node.getClass();
         String name = cls.getName();
+        if (name.startsWith("java.") || name.startsWith("javax.") || name.startsWith("jdk.") || cls.isEnum()) {
+            return;
+        }
         if (!(name.contains("fusion") || name.contains("BakedModel") || name.contains("Quad")
                 || name.contains("Sprite") || name.contains("Texture"))) {
-            // Still walk Fusion/baked trees; skip unrelated deep graphs
             if (depth > 0 && !name.contains("supermartijn") && !name.contains("minecraft.client.resources.model")) {
                 return;
             }
@@ -521,47 +510,44 @@ public final class BlockLoaderProbe {
 
         for (Field field : allFields(cls)) {
             try {
+                if (field.getDeclaringClass().getName().startsWith("java.")) {
+                    continue;
+                }
                 field.setAccessible(true);
                 Object value = field.get(node);
                 if (value == null) {
                     continue;
                 }
                 String fname = field.getName().toLowerCase();
-                if ((fname.contains("tint") || "t".equals(fname) || fname.equals("tintindex"))
-                        && value instanceof Number num) {
+                if (value instanceof Number num && (fname.contains("tint") || "t".equals(fname))) {
                     tintIndices.add(num.intValue());
                 }
-                if (value instanceof Number num && fname.contains("tint")) {
-                    tintIndices.add(num.intValue());
-                }
-                // BakedQuad tintIndex via getter
                 if (name.contains("BakedQuad") || name.endsWith("$Quad") || name.contains("QuadAccess")) {
                     tryReadTintIndex(value, tintIndices);
                     tryReadSpriteTinting(value, spriteTinting);
                 }
-                if (value instanceof BakedModel
-                        || value instanceof Collection
-                        || value instanceof Map
-                        || value.getClass().isArray()
-                        || value.getClass().getName().contains("fusion")) {
-                    if (value instanceof BakedModel || isLikelyModel(value)
-                            || value.getClass().getName().contains("fusion")) {
-                        collectTintDiagnostics(value, visited, tintIndices, spriteTinting, depth + 1);
-                    } else if (value instanceof Collection<?> col) {
-                        for (Object child : col) {
-                            collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
-                        }
-                    } else if (value instanceof Map<?, ?> map) {
-                        for (Object child : map.values()) {
-                            collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
-                        }
-                    } else if (value instanceof Object[] arr) {
-                        for (Object child : arr) {
-                            collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
-                        }
+                Class<?> childCls = value.getClass();
+                String childName = childCls.getName();
+                if (childCls.isEnum() || childName.startsWith("java.") || childName.startsWith("javax.")) {
+                    continue;
+                }
+                if (value instanceof BakedModel || isLikelyModel(value) || childName.contains("fusion")) {
+                    collectTintDiagnostics(value, visited, tintIndices, spriteTinting, depth + 1);
+                } else if (value instanceof Collection<?> col) {
+                    for (Object child : col) {
+                        collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
+                    }
+                } else if (value instanceof Map<?, ?> map) {
+                    for (Object child : map.values()) {
+                        collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
+                    }
+                } else if (value instanceof Object[] arr) {
+                    for (Object child : arr) {
+                        collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
                     }
                 }
             } catch (Throwable ignored) {
+                // JDK modules deny setAccessible on java.lang.*; skip that field
             }
         }
         tryReadTintIndex(node, tintIndices);

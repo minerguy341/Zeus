@@ -16,9 +16,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Fusion item rendering calls {@code QuadTintingHelper.getColor} with a null world/pos,
  * which forces the default grass/foliage color. When that happens, substitute the
  * client player's biome colors so held/inventory Fusion overlays track the live biome.
- * <p>
- * Visual Overhaul cannot do this: it only registers vanilla {@code ItemColors}, and
- * Fusion's magic tintIndex path never consults those providers.
  */
 @Mixin(targets = "com.supermartijn642.fusion.texture.QuadTintingHelper", remap = false)
 public class FusionQuadTintingHelperMixin {
