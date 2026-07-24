@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+
+  "name": "${name}",
+  "description": "${description}",
+  "authors": [],
+  "contact": {},
+
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "${group}.Zeus"
+    ],
+    "client": [
+      "${group}.client.ZeusClient"
+    ]
+  },
+  "mixins": [
+    "zeus.mixins.json"
+  ],
+  "accessWidener": "zeus.accesswidener",
+  "depends": {
+    "fabricloader": "*",
+    "fabric-api": ">=${fabricVersion}",
+    "minecraft": ">=${minecraftVersion}"
+  },
+  "suggests": {
+    "athena": "*",
+    "fusion": "*",
+    "chipped": "*"
+  }
+}

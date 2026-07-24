@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.zeus.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "plugin": "dev.zeus.mixin.ZeusMixinPlugin",
+  "client": [
+    "AthenaResourceLoaderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

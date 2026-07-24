@@ -1,0 +1,3 @@
+# Drop Fabric remount-stack jars here (Athena, Fusion, Chipped, Resourceful Lib).
+# Loom remaps them for the Mojmap runClient.
+# See README — do not put intermediary jars in run/mods.

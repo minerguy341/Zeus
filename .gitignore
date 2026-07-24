@@ -1,0 +1,71 @@
+# minecraft
+run/
+
+# Dev remount-stack jars (drop Fabric builds here; see README)
+mods/*.jar
+!mods/.gitkeep
+
+# gradle
+secrets.gradle
+.kotlin/
+.gradle/
+build/
+**/build/
+out/
+classes/
+versions/*-*/**
+!gradle-wrapper.jar
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Cache of project
+.gradletasknamecache
+
+# Documentation
+**/node_modules
+**/.docusaurus
+
+# idea
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# vscode
+.settings/
+.vscode/
+bin/
+.classpath
+.project
+
+# macos
+*.DS_Store
+
+# java
+hs_err_*.log
+replay_*.log
+*.hprof
+*.jfr
+
+
+
+# secrets
+.env
+.env.*
+
+# local temp extracts / caches
+.tmp-*/
+.tmp-*.zip
+
+# local build/smoke logs (not source)
+*.log
+compile-*.txt
+build-compile*.txt
+deps-*.txt
+runclient-*
+
+# compiled stonecraft plugin classes (local)
+gg/
+*.class
+

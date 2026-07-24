@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "id": "resourcefullib",
+  "version": "3.0.12",
+  "name": "Resourceful Lib",
+  "description": "Library Mod by Team Resourceful",
+  "contact": {
+    "issues": "https://github.com/Team-Resourceful/ResourcefulLib/issues/new/choose",
+    "sources": "https://github.com/Team-Resourceful/ResourcefulLib",
+    "homepage": "https://resourcefulbees.com"
+  },
+  "authors": [
+    "ThatGravyBoat",
+    "Epic_Oreo"
+  ],
+  "entrypoints": {
+    "client": [
+      "com.teamresourceful.resourcefullib.fabric.ResourcefulLibFabricClient"
+    ],
+    "main": [
+      "com.teamresourceful.resourcefullib.ResourcefulLib::init"
+    ],
+    "server": [
+      "com.teamresourceful.resourcefullib.fabric.ResourcefulLibFabricServer"
+    ]
+  },
+  "mixins": [
+    "resourcefullib.mixins.json"
+  ],
+  "license": "MIT",
+  "environment": "*",
+  "depends": {
+    "fabric": "*",
+    "minecraft": "\u003e\u003d1.20.5"
+  },
+  "jars": [
+    {
+      "file": "META-INF/jars/yabn-1.0.3.jar"
+    },
+    {
+      "file": "META-INF/jars/bytecodecs-1.1.2.jar"
+    }
+  ]
+}

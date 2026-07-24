@@ -1,0 +1,889 @@
+{
+  "sha": "deb1209837a201f7ac9f0f3a616521dc1831b78e",
+  "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/deb1209837a201f7ac9f0f3a616521dc1831b78e",
+  "tree": [
+    {
+      "path": ".github",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "11c1ffa427d46e044f22a36db40cf250b39b3c9f",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/11c1ffa427d46e044f22a36db40cf250b39b3c9f"
+    },
+    {
+      "path": ".github/workflows",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e19a1a09cd531d214e37c147ee91ee68b2e846ea",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/e19a1a09cd531d214e37c147ee91ee68b2e846ea"
+    },
+    {
+      "path": ".github/workflows/release.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10314e7ebea44b24a951ccd9df55e3d3e20daff4",
+      "size": 3152,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/10314e7ebea44b24a951ccd9df55e3d3e20daff4"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3c37caf384512066938cb75eabf89984fcb29bdf",
+      "size": 1637,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/3c37caf384512066938cb75eabf89984fcb29bdf"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b62d2b3d072d77fb2a11563ac5e442582a71271",
+      "size": 1072,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/9b62d2b3d072d77fb2a11563ac5e442582a71271"
+    },
+    {
+      "path": "build.gradle.kts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36bef4618d1d9dcf24093c769f15dfd471af3667",
+      "size": 4701,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/36bef4618d1d9dcf24093c769f15dfd471af3667"
+    },
+    {
+      "path": "changelog.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e3c18efa70805392cddcc8d08c15af69f919dc9c",
+      "size": 103,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/e3c18efa70805392cddcc8d08c15af69f919dc9c"
+    },
+    {
+      "path": "common",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7772d6d1510500d4930c6ca175ed816368a61308",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/7772d6d1510500d4930c6ca175ed816368a61308"
+    },
+    {
+      "path": "common/build.gradle.kts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74837020e07afb7102064f5280e93aebf963ba6b",
+      "size": 272,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/74837020e07afb7102064f5280e93aebf963ba6b"
+    },
+    {
+      "path": "common/src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b721edec0bc5809affc9d49337a972a5198dd24c",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/b721edec0bc5809affc9d49337a972a5198dd24c"
+    },
+    {
+      "path": "common/src/main",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "207a9c0724930c96d24a22dc73638a18d2614aaf",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/207a9c0724930c96d24a22dc73638a18d2614aaf"
+    },
+    {
+      "path": "common/src/main/java",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "125fe629b854cecab6547f93e1c3a79165de64a7",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/125fe629b854cecab6547f93e1c3a79165de64a7"
+    },
+    {
+      "path": "common/src/main/java/earth",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1f90aaa871f0f14dca595ed1086867055444f6d9",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/1f90aaa871f0f14dca595ed1086867055444f6d9"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2086ad5a3562b1720cdeaf6b807916448b9139ca",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/2086ad5a3562b1720cdeaf6b807916448b9139ca"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "49d15b466c496f0f3c2e1e1ce720322b8786558b",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/49d15b466c496f0f3c2e1e1ce720322b8786558b"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1e8c9bd569d18ffa189013574eccc3aeccd08556",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/1e8c9bd569d18ffa189013574eccc3aeccd08556"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "16e0bbe87cf83941d1a0345020701577e29956b7",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/16e0bbe87cf83941d1a0345020701577e29956b7"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/models",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d923ce6cdd4db30c2e4a83dc4cef5149cb34a7bc",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/d923ce6cdd4db30c2e4a83dc4cef5149cb34a7bc"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/models/AthenaBlockModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b8db1eb2c085b18b6072ad309807e12be374edee",
+      "size": 1721,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/b8db1eb2c085b18b6072ad309807e12be374edee"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/models/AthenaModelAttributes.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "02f4ae075bc7635fbd513bc1db5cf743e61b0e25",
+      "size": 1041,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/02f4ae075bc7635fbd513bc1db5cf743e61b0e25"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/models/AthenaModelFactory.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "695e77faf46de10121ffed37573b2fa61aea6cd4",
+      "size": 221,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/695e77faf46de10121ffed37573b2fa61aea6cd4"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/models/AthenaQuad.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0501f05dd0e4a3bd73731fb0018e63470be12d25",
+      "size": 1819,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/0501f05dd0e4a3bd73731fb0018e63470be12d25"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/models/FactoryManager.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8091d51fd93ca7117b011cdb4f62c00959fad33f",
+      "size": 609,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/8091d51fd93ca7117b011cdb4f62c00959fad33f"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/models/NotNullUnbakedModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "15382782d012283769a0969386063d9a1c31e033",
+      "size": 449,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/15382782d012283769a0969386063d9a1c31e033"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/models/TintProvider.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1aac5fd7e9ed384e5649df00d9a608c987666ec7",
+      "size": 1722,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/1aac5fd7e9ed384e5649df00d9a608c987666ec7"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/utils",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f90428e00b755cf6bfd52c8ddcda0105c3804bb1",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/f90428e00b755cf6bfd52c8ddcda0105c3804bb1"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/utils/AppearanceAndTintGetter.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "39a304c69ada9be7b327700c64c6951b59867d52",
+      "size": 772,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/39a304c69ada9be7b327700c64c6951b59867d52"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/utils/AthenaUnbakedModelLoader.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0ec10cfbc1c383d2ce9dc8b7637612754bb41f9a",
+      "size": 1526,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/0ec10cfbc1c383d2ce9dc8b7637612754bb41f9a"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/utils/AthenaUtils.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "44589a511b4986cfabf9bb4f08a95d1995f283af",
+      "size": 3868,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/44589a511b4986cfabf9bb4f08a95d1995f283af"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/utils/CtmState.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "edb667f80a4264538783d1e2c5e2f4981b9c4eab",
+      "size": 2630,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/edb667f80a4264538783d1e2c5e2f4981b9c4eab"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/utils/CtmUtils.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "391b7c3ec6212f58b1aa571985114dcb911e3630",
+      "size": 8802,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/391b7c3ec6212f58b1aa571985114dcb911e3630"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/api/client/utils/NullableEnumMap.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "21cd0cd74b5dcdce3b9981f6b2f2b58fa1ce4cb6",
+      "size": 4539,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/21cd0cd74b5dcdce3b9981f6b2f2b58fa1ce4cb6"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5529c9d69e7b61230edb0f62f3e457dcc8aa8d13",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/5529c9d69e7b61230edb0f62f3e457dcc8aa8d13"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f22b35b17b18a9fa8bb6cd646f420146b1da91b3",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/f22b35b17b18a9fa8bb6cd646f420146b1da91b3"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/DefaultModels.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "808cb469c2898dda4a0262ae5e5206c8324a4c55",
+      "size": 1085,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/808cb469c2898dda4a0262ae5e5206c8324a4c55"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d7ab09a3e9c298c2c34e3673d1757dffe69de9f9",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/d7ab09a3e9c298c2c34e3673d1757dffe69de9f9"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/ConnectedBlockModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ec22d6572ad0081d8a27509dc485dcae353efb50",
+      "size": 6654,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/ec22d6572ad0081d8a27509dc485dcae353efb50"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/ConnectedCarpetBlockModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6981d5eb91db5757595864913f61eab4a3dfa616",
+      "size": 4376,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/6981d5eb91db5757595864913f61eab4a3dfa616"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/GiantBlockModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9e84d72849f7682abf0737636ee49446ee241371",
+      "size": 4305,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/9e84d72849f7682abf0737636ee49446ee241371"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/LimitedPillarBlockModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "803f3318aba1b994ac189fd6c11fedeb71fb5e4a",
+      "size": 4785,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/803f3318aba1b994ac189fd6c11fedeb71fb5e4a"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/PaneConnectedBlockModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e3524b9d405e7b757fa9cb1b66a511f82c6fa9e9",
+      "size": 6678,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/e3524b9d405e7b757fa9cb1b66a511f82c6fa9e9"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/PanePillarBlockModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "683a17d9cbf7149723456f820ef5a4e1991e7a21",
+      "size": 6917,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/683a17d9cbf7149723456f820ef5a4e1991e7a21"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/PillarBlockModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6b5417c034c1ebd6da736d074c7b23267ed0b958",
+      "size": 4944,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/6b5417c034c1ebd6da736d074c7b23267ed0b958"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/ctm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e04f7009a05b1e30111bfbcaf596fc33f04132b4",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/e04f7009a05b1e30111bfbcaf596fc33f04132b4"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/client/models/ctm/ConnectedTextureMap.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfbe9d8d27114688fc039b513f31caac9219166d",
+      "size": 2668,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/cfbe9d8d27114688fc039b513f31caac9219166d"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/loading",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "78f76d3f4022eb8c00db6e5c42822563e2873c65",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/78f76d3f4022eb8c00db6e5c42822563e2873c65"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/impl/loading/AthenaResourceLoader.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "53ae925148764c95be78ce6352a510f6be1b1455",
+      "size": 2585,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/53ae925148764c95be78ce6352a510f6be1b1455"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/mixins",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bdd4408bdfb0793c21cddf0c851fc4b45788d645",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/bdd4408bdfb0793c21cddf0c851fc4b45788d645"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/mixins/ModelBakeryMixin.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "caea5c8b7b04ec712290036b8b154c6eaced5b8e",
+      "size": 1363,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/caea5c8b7b04ec712290036b8b154c6eaced5b8e"
+    },
+    {
+      "path": "common/src/main/java/earth/terrarium/athena/mixins/ModelManagerMixin.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26ad67f58da1cd72bee729e1a4c920dd6733dfc1",
+      "size": 1511,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/26ad67f58da1cd72bee729e1a4c920dd6733dfc1"
+    },
+    {
+      "path": "common/src/main/resources",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ec806bceb3aaf88d140f8a5080dcc80f330fbe2f",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/ec806bceb3aaf88d140f8a5080dcc80f330fbe2f"
+    },
+    {
+      "path": "common/src/main/resources/athena.mixins.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0241ea4f5afd0a3cd2cc3d2fad6bc4d45cf0d9ac",
+      "size": 266,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/0241ea4f5afd0a3cd2cc3d2fad6bc4d45cf0d9ac"
+    },
+    {
+      "path": "fabric",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "840e9a6578cb6a1a78b67848e8e3ab74d8460aeb",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/840e9a6578cb6a1a78b67848e8e3ab74d8460aeb"
+    },
+    {
+      "path": "fabric/build.gradle.kts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be8f6ea841511e4d272673509f7f81b150d09d3a",
+      "size": 864,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/be8f6ea841511e4d272673509f7f81b150d09d3a"
+    },
+    {
+      "path": "fabric/gradle.properties",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0c47eab536f2680fc82aba86f81e440035b69f16",
+      "size": 25,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/0c47eab536f2680fc82aba86f81e440035b69f16"
+    },
+    {
+      "path": "fabric/src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1b081bd8874cef28d1f346d2cb42ec98393f43b0",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/1b081bd8874cef28d1f346d2cb42ec98393f43b0"
+    },
+    {
+      "path": "fabric/src/main",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "399432c3c8072a1d8d1bb1c46b21ee6f813b93ec",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/399432c3c8072a1d8d1bb1c46b21ee6f813b93ec"
+    },
+    {
+      "path": "fabric/src/main/java",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f6109b4bd12f6253320b237923dd0bafd3096c57",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/f6109b4bd12f6253320b237923dd0bafd3096c57"
+    },
+    {
+      "path": "fabric/src/main/java/earth",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4d4774840a6586b2ca1dabf13a1ed23592150874",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/4d4774840a6586b2ca1dabf13a1ed23592150874"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e39c801b61f6b68377ff14094b74187a95025fc6",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/e39c801b61f6b68377ff14094b74187a95025fc6"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "55e583edf564cdf583552b2d1a6f9338c32aba66",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/55e583edf564cdf583552b2d1a6f9338c32aba66"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "422d869d8200cd8e7d4eac2dc551027224275f8e",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/422d869d8200cd8e7d4eac2dc551027224275f8e"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d5cb1983fb67310491b47aba996aebb999689b5b",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/d5cb1983fb67310491b47aba996aebb999689b5b"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/fabric",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b9a56876932b499c0ec98b15e1f47fe8c6b61fc6",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/b9a56876932b499c0ec98b15e1f47fe8c6b61fc6"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/fabric/AthenaBakedModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3b3ae228eafdacb24bdb394e40d2e810ebedd24d",
+      "size": 6172,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/3b3ae228eafdacb24bdb394e40d2e810ebedd24d"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/fabric/AthenaFabricClient.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c995a6ef63df8676678a6fe73fb7e89e9f815bcb",
+      "size": 369,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/c995a6ef63df8676678a6fe73fb7e89e9f815bcb"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/fabric/AthenaModelLoadingPlugin.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e5d117925b36607f5ffa874bcf8d3558bf52aa7e",
+      "size": 620,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/e5d117925b36607f5ffa874bcf8d3558bf52aa7e"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/fabric/AthenaUnbakedModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "931d423213b6b0a894fb46b98986a5c0f657f118",
+      "size": 1181,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/931d423213b6b0a894fb46b98986a5c0f657f118"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/fabric/WrappedGetter.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c352f00aaea5c2399fdd7ba46dfb33ebf5c37247",
+      "size": 3364,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/c352f00aaea5c2399fdd7ba46dfb33ebf5c37247"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/models",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3f279ebb28c8e2390149d4fe422a07b2985de4f4",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/3f279ebb28c8e2390149d4fe422a07b2985de4f4"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/models/fabric",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "55e2aa2649e77e94f0a8d51ad04b7be8ee2a44f9",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/55e2aa2649e77e94f0a8d51ad04b7be8ee2a44f9"
+    },
+    {
+      "path": "fabric/src/main/java/earth/terrarium/athena/api/client/models/fabric/FactoryManagerImpl.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d748e71c2158147ba3ee0f0a17f20b53b4f6f67",
+      "size": 691,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/3d748e71c2158147ba3ee0f0a17f20b53b4f6f67"
+    },
+    {
+      "path": "fabric/src/main/resources",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ccf87964733bf2159b0bce0d29d7869273449a4a",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/ccf87964733bf2159b0bce0d29d7869273449a4a"
+    },
+    {
+      "path": "fabric/src/main/resources/fabric.mod.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "74c282d44a06672df14bf57fdd711c8be8083192",
+      "size": 843,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/74c282d44a06672df14bf57fdd711c8be8083192"
+    },
+    {
+      "path": "gradle.properties",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "51262f8228813a25fe588df8993db1c160d09300",
+      "size": 155,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/51262f8228813a25fe588df8993db1c160d09300"
+    },
+    {
+      "path": "gradle",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4c366085027873aed9084d0bd7d0007304035886",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/4c366085027873aed9084d0bd7d0007304035886"
+    },
+    {
+      "path": "gradle/wrapper",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b1c62acea18f75a0cff78804b76419f85e3a5955",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/b1c62acea18f75a0cff78804b76419f85e3a5955"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.jar",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e708b1c023ec8b20f512888fe07c5bd3ff77bb8f",
+      "size": 59203,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/e708b1c023ec8b20f512888fe07c5bd3ff77bb8f"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "db4c326069a10aff3d4820fea919c706d4809488",
+      "size": 199,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/db4c326069a10aff3d4820fea919c706d4809488"
+    },
+    {
+      "path": "gradlew",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "bda8c9585e9cc2297d60b5259139969869a76057",
+      "size": 8068,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/bda8c9585e9cc2297d60b5259139969869a76057"
+    },
+    {
+      "path": "gradlew.bat",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac1b06f93825db68fb0c0b5150917f340eaa5d02",
+      "size": 2763,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/ac1b06f93825db68fb0c0b5150917f340eaa5d02"
+    },
+    {
+      "path": "neoforge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fea3684675bcdc85d4f097ea3ba7d0c81675f9ab",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/fea3684675bcdc85d4f097ea3ba7d0c81675f9ab"
+    },
+    {
+      "path": "neoforge/build.gradle.kts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "72aa206a638fcdcbbe3d379e2b031c80b400f02b",
+      "size": 646,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/72aa206a638fcdcbbe3d379e2b031c80b400f02b"
+    },
+    {
+      "path": "neoforge/gradle.properties",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a9b2b4ac7e93067298c8dec5fb3cfa06b58e67a7",
+      "size": 49,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/a9b2b4ac7e93067298c8dec5fb3cfa06b58e67a7"
+    },
+    {
+      "path": "neoforge/src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "969c1c48c85e0ed0b6f915c0baa1db01c66a4d3b",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/969c1c48c85e0ed0b6f915c0baa1db01c66a4d3b"
+    },
+    {
+      "path": "neoforge/src/main",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "032f85ac323af2f56406ce7be435591955c829af",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/032f85ac323af2f56406ce7be435591955c829af"
+    },
+    {
+      "path": "neoforge/src/main/java",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f18f9f3e52c3f048d3da6433a473584f673d2a41",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/f18f9f3e52c3f048d3da6433a473584f673d2a41"
+    },
+    {
+      "path": "neoforge/src/main/java/earth",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "85ae6c07f58e5d0fff379336bb4dc0cea4eb90aa",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/85ae6c07f58e5d0fff379336bb4dc0cea4eb90aa"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a9e9e46ab2374bd892b864e9353749a7a2aeef34",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/a9e9e46ab2374bd892b864e9353749a7a2aeef34"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cc1f2bf6b306b71939a52f8f7e3574f4d526eb1b",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/cc1f2bf6b306b71939a52f8f7e3574f4d526eb1b"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9484e72f5141ad273db5f48b0330b608e4ec52ae",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/9484e72f5141ad273db5f48b0330b608e4ec52ae"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5fce777908a0dae574f8fb844040e07c5e57347e",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/5fce777908a0dae574f8fb844040e07c5e57347e"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/models",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "edf9cdc37f1f2af9ee79a7fc77906b0ed0604ce4",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/edf9cdc37f1f2af9ee79a7fc77906b0ed0604ce4"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/models/neoforge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "41339b039114d746b505d4c8935169b0016c698f",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/41339b039114d746b505d4c8935169b0016c698f"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/models/neoforge/FactoryManagerImpl.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ee98de36e5861735a4b6fe5e5567c7da1e7790a",
+      "size": 1095,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/8ee98de36e5861735a4b6fe5e5567c7da1e7790a"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/neoforge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "82d8692b33aa80b6738a72f8d5cfa0e397912f51",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/82d8692b33aa80b6738a72f8d5cfa0e397912f51"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/neoforge/AthenaBakedModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0ed39d464b8e0298922f0592ddf56b0dd5c070e",
+      "size": 6074,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/b0ed39d464b8e0298922f0592ddf56b0dd5c070e"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/neoforge/AthenaBlockElementFace.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5822560c43f569701370e48df478fc6fa0325a78",
+      "size": 2269,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/5822560c43f569701370e48df478fc6fa0325a78"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/neoforge/AthenaUnbakedModel.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "795216aa9470fd66712075d7da46a99bd2d6a6f5",
+      "size": 1219,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/795216aa9470fd66712075d7da46a99bd2d6a6f5"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/neoforge/ForgeAthenaUtils.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6355ffabd867b0f0686443d7fa32282ce28fc67b",
+      "size": 2924,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/6355ffabd867b0f0686443d7fa32282ce28fc67b"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/api/client/neoforge/WrappedGetter.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8201c5e80dc04acc15fa2cd27c7eb8fc9c9283fd",
+      "size": 3303,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/8201c5e80dc04acc15fa2cd27c7eb8fc9c9283fd"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/mixins",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a1d06166c40ba91967a7f7d017c33541ee0b0fd4",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/a1d06166c40ba91967a7f7d017c33541ee0b0fd4"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/mixins/neoforge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "52c8798ff7f557a7363b83ccf52235756662a7e8",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/52c8798ff7f557a7363b83ccf52235756662a7e8"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/mixins/neoforge/ModelBakeryMixin.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5836036623dbcfc62f8848d8abce22bb288fc414",
+      "size": 1528,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/5836036623dbcfc62f8848d8abce22bb288fc414"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/neoforge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "64bd76a16b66633a78e7a93def4c151db15c0c04",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/64bd76a16b66633a78e7a93def4c151db15c0c04"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/neoforge/AthenaNeoForge.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4cd19fa801437ec87ad5d2181a1455b70181b502",
+      "size": 536,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/4cd19fa801437ec87ad5d2181a1455b70181b502"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/neoforge/client",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7b8effdb6b55c12513253dd8c36665fbba4ec10d",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/7b8effdb6b55c12513253dd8c36665fbba4ec10d"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/neoforge/client/AthenaGeometryLoader.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bdbc1f68e6e229748a55e29c283658938e8a9905",
+      "size": 2365,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/bdbc1f68e6e229748a55e29c283658938e8a9905"
+    },
+    {
+      "path": "neoforge/src/main/java/earth/terrarium/athena/neoforge/client/AthenaNeoForgeClient.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5da1897428d185ecbe534f7c5af608205a72055c",
+      "size": 584,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/5da1897428d185ecbe534f7c5af608205a72055c"
+    },
+    {
+      "path": "neoforge/src/main/resources",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5d1f69a95ec4220879860ed6259d69831294c00f",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/5d1f69a95ec4220879860ed6259d69831294c00f"
+    },
+    {
+      "path": "neoforge/src/main/resources/META-INF",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "72db28efca3ae953587072b07910464abca385d7",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/72db28efca3ae953587072b07910464abca385d7"
+    },
+    {
+      "path": "neoforge/src/main/resources/META-INF/neoforge.mods.toml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f3101319fb190908ea5673864431e6a611cc894b",
+      "size": 777,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/f3101319fb190908ea5673864431e6a611cc894b"
+    },
+    {
+      "path": "neoforge/src/main/resources/athena-neoforge.mixins.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9cfdccd4ba7dee7f59e5570bd5891fafdff3af18",
+      "size": 224,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/9cfdccd4ba7dee7f59e5570bd5891fafdff3af18"
+    },
+    {
+      "path": "readme.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e1f5080e5612efe0e2af9558b6baa53dc6da16bb",
+      "size": 211,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/e1f5080e5612efe0e2af9558b6baa53dc6da16bb"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e99bd50eef2cca7601e1eb19ef79ce451e50aa8",
+      "size": 425,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/8e99bd50eef2cca7601e1eb19ef79ce451e50aa8"
+    },
+    {
+      "path": "templates",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6c97ca9132c5831e4ba8600e11ef02c9e20f14f2",
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/trees/6c97ca9132c5831e4ba8600e11ef02c9e20f14f2"
+    },
+    {
+      "path": "templates/embed.json.template",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fee9e71bfcad60d532507a59143fd32afd4d174f",
+      "size": 1580,
+      "url": "https://api.github.com/repos/terrarium-earth/Athena/git/blobs/fee9e71bfcad60d532507a59143fd32afd4d174f"
+    }
+  ],
+  "truncated": false
+}
