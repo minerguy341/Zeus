@@ -1,13 +1,13 @@
 modLoader = "javafml"
 loaderVersion = "*"
 issueTrackerURL = "https://github.com/meza/Stonecraft/issues"
-license = "GPL-3.0"
+license = "MIT"
 
 [[mods]]
 modId = "${id}"
 version = "${version}"
 displayName = "${name}"
-authors = "Meza"
+authors = "minerguy341"
 description = '''
 ${description}
 '''

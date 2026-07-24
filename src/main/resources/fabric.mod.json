@@ -5,7 +5,8 @@
 
   "name": "${name}",
   "description": "${description}",
-  "authors": [],
+  "license": "MIT", 
+  "authors": ["minerguy341"],
   "contact": {},
 
   "environment": "client",

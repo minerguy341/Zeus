@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2025 Meza
+Copyright (c) 2026 minerguy341
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,26 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+--------------------------------------------------------------------------------
+
+Third-party assets (not covered by this MIT license)
+
+Zeus is a client mod. It does not claim ownership of textures, models, or other
+non-code assets from Terrarium projects such as Chipped (or Athena CTM where
+those assets originate from Terrarium).
+
+Under the Terrarium License used by Chipped:
+
+  - Code is licensed under MIT.
+  - Non-code assets (including original textures and models) are All Rights
+    Reserved by Terrarium / the respective authors.
+
+Any Chipped, Athena, or other Terrarium textures you use alongside Zeus - whether
+from those mods, from a resource pack that redistributes or derives from them, or
+from elsewhere - remain subject to Terrarium's license and copyright. Permission
+to use, modify, or redistribute those assets must come from Terrarium's terms (or
+an explicit grant from the rights holders), not from this Zeus MIT license.
+
+Terrarium / Chipped license reference:
+https://github.com/terrarium-earth/Chipped/blob/1.21.x/LICENSE

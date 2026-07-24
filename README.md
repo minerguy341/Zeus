@@ -100,3 +100,9 @@ Blockstates that only point at Fusion models (without `athena:*`) are enough —
 - Live Fusion item biome tint: implemented (Fusion soft-depend mixin)
 - Debug probes (`/zeus loader`, `/zeus loader item`): implemented
 - Extra backends: register via `CtmBackendRegistry` with `modelLoaderId()`
+
+## License
+
+Zeus code is **MIT** (Copyright 2026 minerguy341). See [LICENSE](LICENSE).
+
+Terrarium retains All Rights Reserved on Chipped / related **non-code assets** (textures, models, etc.) under the [Terrarium License](https://github.com/terrarium-earth/Chipped/blob/1.21.x/LICENSE). Zeus does not relicense those assets.
