@@ -7,17 +7,19 @@ import dev.zeus.ZeusConfig;
 import dev.zeus.remount.AthenaSuppress;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-
-import net.minecraft.client.resources.model.BakedModel;
 import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.HashSet;
@@ -31,10 +33,62 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * Resolves which model loader(s) the looked-at block's effective resources declare.
+ * Resolves which model loader(s) a looked-at block or held item's effective resources declare.
  */
 public final class BlockLoaderProbe {
     private BlockLoaderProbe() {
+    }
+
+    public static void reportHeldItem() {
+        Minecraft mc = Minecraft.getInstance();
+        LocalPlayer player = mc.player;
+        if (player == null) {
+            return;
+        }
+
+        ItemStack stack = player.getMainHandItem();
+        InteractionHand hand = InteractionHand.MAIN_HAND;
+        if (stack.isEmpty()) {
+            stack = player.getOffhandItem();
+            hand = InteractionHand.OFF_HAND;
+        }
+        if (stack.isEmpty()) {
+            tell(player, "Hold an item in either hand first.");
+            return;
+        }
+
+        ResourceLocation itemId = BuiltInRegistries.ITEM.getKey(stack.getItem());
+        ResourceManager resources = mc.getResourceManager();
+
+        tell(player, "---- Zeus item loader probe ----");
+        tell(player, "Item: " + itemId + " (" + hand + ", count=" + stack.getCount() + ")");
+        tell(player, "Namespace remountable: " + ZeusConfig.remounts(itemId.getNamespace())
+                + " (backend=" + ZeusConfig.ctmBackend + ")");
+
+        ResourceLocation itemModelId = ResourceLocation.fromNamespaceAndPath(
+                itemId.getNamespace(),
+                "item/" + itemId.getPath()
+        );
+        Set<String> loaders = new LinkedHashSet<>();
+        inspectModel(player, resources, new ModelRef(itemModelId), loaders, 0, true);
+
+        String summary = loaders.isEmpty() ? "vanilla (no loader key)" : String.join(", ", loaders);
+        tell(player, "Effective loader(s): " + summary);
+
+        if (stack.getItem() instanceof BlockItem blockItem) {
+            ResourceLocation blockId = BuiltInRegistries.BLOCK.getKey(blockItem.getBlock());
+            boolean wouldSuppress = AthenaSuppress.shouldSuppress(
+                    ResourceLocation.fromNamespaceAndPath(blockId.getNamespace(), "block/" + blockId.getPath())
+            );
+            boolean wouldSuppressPlain = AthenaSuppress.shouldSuppress(blockId);
+            tell(player, "Zeus would suppress Athena for block/" + blockId.getPath() + ": " + wouldSuppress
+                    + " | for " + blockId + ": " + wouldSuppressPlain);
+            probeAthena(player, blockId);
+        }
+
+        probeBakedItemModel(player, stack);
+        probeFusionItemTint(player, stack);
+        tell(player, "---- end item probe ----");
     }
 
     public static void reportLookedAtBlock() {
@@ -93,7 +147,7 @@ public final class BlockLoaderProbe {
 
         Set<String> loaders = new LinkedHashSet<>();
         for (ModelRef ref : models) {
-            inspectModel(player, resources, ref, loaders, 0);
+            inspectModel(player, resources, ref, loaders, 0, false);
         }
 
         String summary = loaders.isEmpty() ? "vanilla (no loader key)" : String.join(", ", loaders);
@@ -117,7 +171,8 @@ public final class BlockLoaderProbe {
             ResourceManager resources,
             ModelRef ref,
             Set<String> loaders,
-            int depth
+            int depth,
+            boolean followParents
     ) {
         if (depth > 4) {
             return;
@@ -171,25 +226,37 @@ public final class BlockLoaderProbe {
                     }
                 }
                 if (childId != null) {
-                    inspectModel(player, resources, new ModelRef(ResourceLocation.parse(childId)), loaders, depth + 1);
+                    inspectModel(
+                            player,
+                            resources,
+                            new ModelRef(ResourceLocation.parse(childId)),
+                            loaders,
+                            depth + 1,
+                            followParents
+                    );
                 }
             }
         }
 
-        // Parent chain (vanilla)
+        // Parent chain (vanilla). Item models often only parent a block model that has the loader.
         if (json.has("parent") && json.get("parent").isJsonPrimitive()) {
             String parent = json.get("parent").getAsString();
             if (!parent.startsWith("#")) {
                 ResourceLocation parentId = ResourceLocation.parse(parent.contains(":") ? parent : "minecraft:" + parent);
-                // Only recurse if parent json might declare a loader (rare)
                 Optional<JsonObject> parentJson = readJson(
                         resources,
                         ResourceLocation.fromNamespaceAndPath(parentId.getNamespace(), "models/" + parentId.getPath() + ".json")
                 );
                 if (parentJson.isPresent()) {
                     String parentLoader = readLoader(parentJson.get());
-                    if (parentLoader != null) {
-                        inspectModel(player, resources, new ModelRef(parentId), loaders, depth + 1);
+                    String parentType = parentJson.get().has("type") && parentJson.get().get("type").isJsonPrimitive()
+                            ? parentJson.get().get("type").getAsString()
+                            : null;
+                    boolean interesting = parentLoader != null
+                            || "composite".equalsIgnoreCase(parentType)
+                            || followParents;
+                    if (interesting) {
+                        inspectModel(player, resources, new ModelRef(parentId), loaders, depth + 1, followParents);
                     }
                 }
             }
@@ -355,6 +422,233 @@ public final class BlockLoaderProbe {
             tell(player, "Baked verdict: " + bakedVerdict(tags));
         } catch (Exception e) {
             tell(player, "BakedModel probe failed: " + e);
+        }
+    }
+
+    private static void probeBakedItemModel(LocalPlayer player, ItemStack stack) {
+        try {
+            Minecraft mc = Minecraft.getInstance();
+            BakedModel model = mc.getItemRenderer().getModel(stack, mc.level, player, 0);
+            tell(player, "BakedModel (from ItemRenderer):");
+            Set<String> tags = new LinkedHashSet<>();
+            Set<Object> visited = new HashSet<>();
+            walkBaked(player, model, 0, visited, tags);
+            tell(player, "Baked verdict: " + bakedVerdict(tags));
+        } catch (Exception e) {
+            tell(player, "Baked item model probe failed: " + e);
+        }
+    }
+
+    /**
+     * Fusion item tint uses magic tintIndex 39216 + {@code QuadTintingHelper} with null world/pos,
+     * which returns the <em>default</em> grass/foliage color — not the biome at your feet.
+     */
+    private static void probeFusionItemTint(LocalPlayer player, ItemStack stack) {
+        tell(player, "Fusion item tint: Zeus remaps null world/pos to player biome (live). Without Zeus: default grass only.");
+        try {
+            Class<?> helper = Class.forName("com.supermartijn642.fusion.texture.QuadTintingHelper");
+            Class<?> tintingEnum = Class.forName(
+                    "com.supermartijn642.fusion.api.texture.types.base.BaseTextureData$QuadTinting"
+            );
+            Object biomeGrass = null;
+            for (Object constant : tintingEnum.getEnumConstants()) {
+                if (constant instanceof Enum<?> e && e.name().equals("BIOME_GRASS")) {
+                    biomeGrass = constant;
+                    break;
+                }
+            }
+            if (biomeGrass == null) {
+                tell(player, "Fusion BIOME_GRASS enum constant missing");
+                return;
+            }
+            Method getColor = helper.getMethod(
+                    "getColor",
+                    tintingEnum,
+                    Class.forName("net.minecraft.world.level.block.state.BlockState"),
+                    Class.forName("net.minecraft.world.level.BlockAndTintGetter"),
+                    Class.forName("net.minecraft.core.BlockPos")
+            );
+            int defaultGrass = (int) getColor.invoke(null, biomeGrass, null, null, null);
+            tell(player, "Fusion default biome_grass for items: #" + String.format("%06X", defaultGrass & 0xFFFFFF)
+                    + " (ARGB=#" + String.format("%08X", defaultGrass) + ")");
+        } catch (ClassNotFoundException e) {
+            tell(player, "Fusion tint helper: not on classpath");
+        } catch (Exception e) {
+            tell(player, "Fusion tint helper probe failed: " + e);
+        }
+
+        try {
+            Minecraft mc = Minecraft.getInstance();
+            BakedModel model = mc.getItemRenderer().getModel(stack, mc.level, player, 0);
+            Set<Integer> tintIndices = new LinkedHashSet<>();
+            Set<String> spriteTinting = new LinkedHashSet<>();
+            Set<Object> visited = new HashSet<>();
+            collectTintDiagnostics(model, visited, tintIndices, spriteTinting, 0);
+            tell(player, "Baked tintIndex values: "
+                    + (tintIndices.isEmpty() ? "(none found)" : tintIndices.toString()));
+            boolean fusionMagic = tintIndices.contains(39216);
+            tell(player, "Fusion magic tintIndex 39216 present: " + fusionMagic
+                    + (fusionMagic ? " (item renderer should apply default tint)" : " (tint will NOT apply on items)"));
+            if (!spriteTinting.isEmpty()) {
+                tell(player, "Sprite Fusion tinting data: " + String.join(", ", spriteTinting));
+            } else {
+                tell(player, "Sprite Fusion tinting data: (none found on walked model fields)");
+            }
+        } catch (Exception e) {
+            tell(player, "Tint-index walk failed: " + e);
+        }
+    }
+
+    private static void collectTintDiagnostics(
+            Object node,
+            Set<Object> visited,
+            Set<Integer> tintIndices,
+            Set<String> spriteTinting,
+            int depth
+    ) {
+        if (node == null || depth > 10 || !visited.add(node)) {
+            return;
+        }
+        Class<?> cls = node.getClass();
+        String name = cls.getName();
+        if (!(name.contains("fusion") || name.contains("BakedModel") || name.contains("Quad")
+                || name.contains("Sprite") || name.contains("Texture"))) {
+            // Still walk Fusion/baked trees; skip unrelated deep graphs
+            if (depth > 0 && !name.contains("supermartijn") && !name.contains("minecraft.client.resources.model")) {
+                return;
+            }
+        }
+
+        for (Field field : allFields(cls)) {
+            try {
+                field.setAccessible(true);
+                Object value = field.get(node);
+                if (value == null) {
+                    continue;
+                }
+                String fname = field.getName().toLowerCase();
+                if ((fname.contains("tint") || "t".equals(fname) || fname.equals("tintindex"))
+                        && value instanceof Number num) {
+                    tintIndices.add(num.intValue());
+                }
+                if (value instanceof Number num && fname.contains("tint")) {
+                    tintIndices.add(num.intValue());
+                }
+                // BakedQuad tintIndex via getter
+                if (name.contains("BakedQuad") || name.endsWith("$Quad") || name.contains("QuadAccess")) {
+                    tryReadTintIndex(value, tintIndices);
+                    tryReadSpriteTinting(value, spriteTinting);
+                }
+                if (value instanceof BakedModel
+                        || value instanceof Collection
+                        || value instanceof Map
+                        || value.getClass().isArray()
+                        || value.getClass().getName().contains("fusion")) {
+                    if (value instanceof BakedModel || isLikelyModel(value)
+                            || value.getClass().getName().contains("fusion")) {
+                        collectTintDiagnostics(value, visited, tintIndices, spriteTinting, depth + 1);
+                    } else if (value instanceof Collection<?> col) {
+                        for (Object child : col) {
+                            collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
+                        }
+                    } else if (value instanceof Map<?, ?> map) {
+                        for (Object child : map.values()) {
+                            collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
+                        }
+                    } else if (value instanceof Object[] arr) {
+                        for (Object child : arr) {
+                            collectTintDiagnostics(child, visited, tintIndices, spriteTinting, depth + 1);
+                        }
+                    }
+                }
+            } catch (Throwable ignored) {
+            }
+        }
+        tryReadTintIndex(node, tintIndices);
+        tryReadSpriteTinting(node, spriteTinting);
+    }
+
+    private static void tryReadTintIndex(Object value, Set<Integer> tintIndices) {
+        try {
+            Method m = value.getClass().getMethod("getTintIndex");
+            Object r = m.invoke(value);
+            if (r instanceof Number num) {
+                tintIndices.add(num.intValue());
+            }
+        } catch (Throwable ignored) {
+        }
+        try {
+            Method m = value.getClass().getMethod("tintIndex");
+            Object r = m.invoke(value);
+            if (r instanceof Number num) {
+                tintIndices.add(num.intValue());
+            }
+        } catch (Throwable ignored) {
+        }
+        for (Field f : allFields(value.getClass())) {
+            try {
+                if (!f.getName().toLowerCase().contains("tint")) {
+                    continue;
+                }
+                f.setAccessible(true);
+                Object r = f.get(value);
+                if (r instanceof Number num) {
+                    tintIndices.add(num.intValue());
+                }
+            } catch (Throwable ignored) {
+            }
+        }
+    }
+
+    private static void tryReadSpriteTinting(Object value, Set<String> spriteTinting) {
+        try {
+            Class<?> spriteHelper = Class.forName("com.supermartijn642.fusion.api.texture.SpriteHelper");
+            Method getInstance = spriteHelper.getMethod(
+                    "getTextureInstance",
+                    Class.forName("net.minecraft.client.renderer.texture.TextureAtlasSprite")
+            );
+            Object sprite = null;
+            for (Method m : value.getClass().getMethods()) {
+                if (m.getParameterCount() == 0 && m.getReturnType().getName().contains("TextureAtlasSprite")) {
+                    sprite = m.invoke(value);
+                    break;
+                }
+            }
+            if (sprite == null) {
+                for (Field f : allFields(value.getClass())) {
+                    if (f.getType().getName().contains("TextureAtlasSprite")
+                            || f.getType().getName().contains("SpriteInstance")) {
+                        f.setAccessible(true);
+                        Object cand = f.get(value);
+                        if (cand != null && cand.getClass().getName().contains("TextureAtlasSprite")) {
+                            sprite = cand;
+                            break;
+                        }
+                        if (cand != null && cand.getClass().getName().contains("SpriteInstance")) {
+                            Method getSprite = cand.getClass().getMethod("getSprite");
+                            sprite = getSprite.invoke(cand);
+                            break;
+                        }
+                    }
+                }
+            }
+            if (sprite == null) {
+                return;
+            }
+            Object textureInstance = getInstance.invoke(null, sprite);
+            if (textureInstance == null) {
+                return;
+            }
+            Method getCustom = textureInstance.getClass().getMethod("getCustomData");
+            Object data = getCustom.invoke(textureInstance);
+            if (data == null) {
+                return;
+            }
+            Method getTinting = data.getClass().getMethod("getTinting");
+            Object tinting = getTinting.invoke(data);
+            String spriteName = String.valueOf(sprite);
+            spriteTinting.add(spriteName + " => " + (tinting == null ? "no tinting" : tinting));
+        } catch (Throwable ignored) {
         }
     }
 

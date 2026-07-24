@@ -21,17 +21,24 @@ public final class ZeusDebugCommands {
                         .executes(ctx -> {
                             BlockLoaderProbe.reportLookedAtBlock();
                             return 1;
-                        }))
+                        })
+                        .then(Commands.literal("item")
+                                .executes(ctx -> {
+                                    BlockLoaderProbe.reportHeldItem();
+                                    return 1;
+                                })))
                 .then(Commands.literal("help")
                         .executes(ctx -> {
                             ctx.getSource().sendSuccess(
-                                    () -> Component.literal("Zeus debug: /zeus loader — probe looked-at block model loaders"),
+                                    () -> Component.literal(
+                                            "Zeus debug: /zeus loader — looked-at block; /zeus loader item — held item"
+                                    ),
                                     false
                             );
                             return 1;
                         }));
         dispatcher.register(root);
-        Zeus.LOGGER.info("Registered client command /zeus loader");
+        Zeus.LOGGER.info("Registered client commands /zeus loader and /zeus loader item");
     }
 
     /*? if fabric {*/
@@ -43,16 +50,21 @@ public final class ZeusDebugCommands {
                         .executes(ctx -> {
                             BlockLoaderProbe.reportLookedAtBlock();
                             return 1;
-                        }))
+                        })
+                        .then(net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal("item")
+                                .executes(ctx -> {
+                                    BlockLoaderProbe.reportHeldItem();
+                                    return 1;
+                                })))
                 .then(net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal("help")
                         .executes(ctx -> {
                             ctx.getSource().sendFeedback(Component.literal(
-                                    "Zeus debug: /zeus loader — probe looked-at block model loaders"
+                                    "Zeus debug: /zeus loader — looked-at block; /zeus loader item — held item"
                             ));
                             return 1;
                         }));
         dispatcher.register(root);
-        Zeus.LOGGER.info("Registered Fabric client command /zeus loader");
+        Zeus.LOGGER.info("Registered Fabric client commands /zeus loader and /zeus loader item");
     }
     /*?}*/
 

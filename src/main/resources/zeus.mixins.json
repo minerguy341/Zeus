@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_21",
   "plugin": "dev.zeus.mixin.ZeusMixinPlugin",
   "client": [
-    "AthenaResourceLoaderMixin"
+    "AthenaResourceLoaderMixin",
+    "FusionQuadTintingHelperMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -17,6 +17,9 @@ public final class ZeusMixinPlugin implements IMixinConfigPlugin {
     private static final String ATHENA_MIXIN = "dev.zeus.mixin.AthenaResourceLoaderMixin";
     private static final String ATHENA_LOADER_RESOURCE =
             "earth/terrarium/athena/impl/loading/AthenaResourceLoader.class";
+    private static final String FUSION_TINT_MIXIN = "dev.zeus.mixin.FusionQuadTintingHelperMixin";
+    private static final String FUSION_TINT_RESOURCE =
+            "com/supermartijn642/fusion/texture/QuadTintingHelper.class";
 
     @Override
     public void onLoad(String mixinPackage) {
@@ -31,6 +34,9 @@ public final class ZeusMixinPlugin implements IMixinConfigPlugin {
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
         if (ATHENA_MIXIN.equals(mixinClassName)) {
             return resourceExists(ATHENA_LOADER_RESOURCE);
+        }
+        if (FUSION_TINT_MIXIN.equals(mixinClassName)) {
+            return resourceExists(FUSION_TINT_RESOURCE);
         }
         return true;
     }
